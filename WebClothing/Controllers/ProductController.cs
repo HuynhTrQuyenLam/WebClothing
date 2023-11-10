@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Razor.Tokenizer.Symbols;
 using System.IO;
-using Model.ViewModel;
+//using Model.ViewModel; em bỏ vô thì nó lỗi
 
 
 namespace WebClothing.Controllers
@@ -32,14 +32,14 @@ namespace WebClothing.Controllers
             {
                 keyword = currentSearch;
             }
-            ViewBag.ListCategory = db.Categories.Where(x => x.IsActive == true).ToList();
+            ViewBag.ListCategory = db.Categories.ToList();
             if (keyword != "")
             //if (!string.IsNullOrEmpty(keyword))
             {
                 ViewBag.NamePage = "Search product";
                 //ViewBag.ListProduct = db.Products.Where(x => x.IsActive == true && x.Name.Contains(keyword)).ToList();
                 //return View();
-                lsproducts = db.Products.Where(x => x.IsActive == true && x.Name.Contains(keyword)).ToList();
+                lsproducts = db.Products.Where(x =>x.Name.Contains(keyword)).ToList();
 
             }
             else if (CategoryID != 0)
@@ -47,7 +47,7 @@ namespace WebClothing.Controllers
                 ViewBag.NamePage = "Category " + db.Categories.Find(CategoryID).Name;
                 //ViewBag.ListProduct = db.Products.Where(x => x.IsActive == true && x.CategoryID == CategoryID).ToList();
                 //return View();
-                lsproducts = db.Products.AsNoTracking().Where(x => x.IsActive == true && x.CategoryID == CategoryID).ToList();
+                lsproducts = db.Products.AsNoTracking().Where(x => x.CategoryID == CategoryID).ToList();
             }
             //else if (SortPrice == 1)
             //{
@@ -92,11 +92,11 @@ namespace WebClothing.Controllers
                 ViewBag.NamePage = "All products";
                 //ViewBag.ListProduct = db.Products.Where(x => x.IsActive == true).ToList();
                 //products = db.Products.Where(x => x.IsActive == true).ToList();
-                lsproducts = db.Products.Where(x => x.IsActive == true).OrderByDescending(x => x.ID).ToList();
+                lsproducts = db.Products.OrderByDescending(x => x.ID).ToList();
             }
             ViewBag.currentSearch = keyword;
             ViewBag.currentCate = CategoryID;
-            ViewBag.SortPrice = SortPrice;
+            //ViewBag.SortPrice = SortPrice;
 
             //int pageNumber = page;
             PagedList<Product> models = new PagedList<Product>(lsproducts.AsQueryable(), pageNumber, pageSize);
@@ -105,6 +105,11 @@ namespace WebClothing.Controllers
             ViewBag.CurrentPage = pageNumber;
             //return View(lsproducts.ToPagedList(pageNumber, pageSize));
             return View(models);
+        }
+
+        public ActionResult Details()
+        {
+            return View();
         }
 
 
