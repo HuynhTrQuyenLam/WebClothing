@@ -10,45 +10,6 @@
     List<WebClothing.Models.Product> products = ViewBag.ListProduct as List<WebClothing.Models.Product>;
 }
 
-    <div class="row">
-        @if (Model != null && Model.Count() > 0)
-        {
-            foreach (var item in Model)
-            {
-                <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                    <div class="product">
-                        <figure class="product-media">
-                            @*<span class="product-label label-new">New</span>*@
-                            <a href="/Product/Details/@item.ID">
-                                <img src="~/Content/images/@item.Image1" alt="Product image" class="product-image">
-                            </a>
-                            <div class="product-action action-icon-top">
-                                <a href="#" class="btn-product btn-cart item_add" data-id="@item.ID"><span>Thêm Vào Giỏ Hàng</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-                        <div class="product-body">
-                            <h3 class="product-title"><a href="/Product/Details/@item.ID">@item.Name (Kho: @item.Quantity)</a></h3><!-- End .product-title -->
-                            <div class="product-price">
-                                @item.Price.Value.ToString("#,##") ₫
-                            </div><!-- End .product-price -->
-
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-                </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
-            }
-        }
-        else
-        {
-            <div class="alert alert-light border-dark w-50">
-                <h4 class="alert-heading">Rất tiếc, không tìm thấy sản phẩm nào </h4>
-            </div>
-        }
-    </div><!-- End .row -->
-
-
-
-
-
 <!-- ================ đây là layout của em ================= -->
 
     <!-- ================ start banner area ================= -->
@@ -71,7 +32,7 @@
                         <div class="head">Browse Categories</div>
                         <ul class="main-categories">
                             <li class="common-filter">
-                                <form action="#">
+                                <form value="/Product/Index" action="#">
                                     <ul>
                                         <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label for="men">Men<span> (3600)</span></label></li>
                                         <li class="filter-list"><input class="pixel-radio" type="radio" id="women" name="brand"><label for="women">Women<span> (3600)</span></label></li>
@@ -86,6 +47,9 @@
                         </ul>
                     </div>
                 </div>
+
+                
+
                 <div class="col-xl-9 col-lg-8 col-md-7">
                     <!-- Start Best Seller -->
                     <section class="lattest-product-area pb-40 category-list">
@@ -104,7 +68,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <p>@item.Category.Name</p>
-                                                <h4 class="card-product__title"><a href="#">@item.Name</a></h4>
+                                                <h4 class="card-product__title"><a href="/Product/Details/@item.ID">@item.Name</a></h4>
                                                 <p class="card-product__price">@item.Price.Value.ToString("#,##") ₫</p>
                                             </div>
                                         </div>
@@ -112,38 +76,7 @@
                                 }
                             }
 
-                                @*<div class="col-md-6 col-lg-4">
-                                    <div class="card text-center card-product">
-                                        <div class="card-product__img">
-                                            <img class="card-img" src="~/Content/Home/img/product/product2.png" alt="">
-                                            <ul class="card-product__imgOverlay">
-                                                <li><button><i class="ti-shopping-cart"></i></button></li>
-                                            </ul>
-                                        </div>
-                                        <div class="card-body">
-                                            <p>Beauty</p>
-                                            <h4 class="card-product__title"><a href="#">Women Freshwash</a></h4>
-                                            <p class="card-product__price">$150.00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4">
-                                    <div class="card text-center card-product">
-                                        <div class="card-product__img">
-                                            <img class="card-img" src="~/Content/Home/img/product/product3.png" alt="">
-                                            <ul class="card-product__imgOverlay">
-                                                <li><button><i class="ti-shopping-cart"></i></button></li>
-                                            </ul>
-                                        </div>
-                                        <div class="card-body">
-                                            <p>Decor</p>
-                                            <h4 class="card-product__title"><a href="#">Room Flash Light</a></h4>
-                                            <p class="card-product__price">$150.00</p>
-                                        </div>
-                                    </div>
-                                </div>*@
-
-                            </div>
+                        </div>
                     </section>
                     <!-- End Best Seller -->
                 </div>
